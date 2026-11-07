@@ -1,0 +1,24 @@
+# Meta Data
+name: "Ray"
+description: "Eine Mod, die 4 Schnellfeuer-Zaubereffekte hinzufügt."
+
+# Mod Settings
+# Meta
+settingsTitle: "Einstellungen"
+# settingsDesc: "Mod Options"
+# Settings
+scalemultiplier: "Schadensskalierungs-Multiplikator"
+scalemultiplierdesc: "Dies ist der Faktor, mit dem der Zauberschaden multipliziert wird; dies dient dazu, zu verhindern, dass der Zauber zu mächtig wird."
+
+
+
+firerate: "Feuerrate"
+fireratedesc: "Dies ist die Zeitspanne zwischen dem Abfeuern von Projektilen."
+
+
+costscale: "Kosten-Skalierungsfaktor"
+costscaledesc: "Dies ist der Faktor, mit dem die Zauberkosten multipliziert werden; er kompensiert die Anzahl der Zauber, die pro Sekunde gewirkt werden."
+
+
+animreltim: "Animations-Auslösezeitpunkt"
+animreltimdesc: "Dies bestimmt, zu welchem ​​Zeitpunkt innerhalb der Zauberanimation der Abschuss der Projektile beginnt. Akzeptiert einen Wert zwischen 0 und 1."

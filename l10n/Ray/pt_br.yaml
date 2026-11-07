@@ -1,0 +1,24 @@
+# Meta Data
+name: "Ray"
+description: "Um mod que adiciona 4 efeitos de feitiços de disparo rápido."
+
+# Mod Settings
+# Meta
+settingsTitle: "Configurações"
+# settingsDesc: "Mod Options"
+# Settings
+scalemultiplier: "Multiplicador de Escala de Dano"
+scalemultiplierdesc: "Este é o valor pelo qual o dano da magia será multiplicado; isso serve para evitar que a magia fique excessivamente poderosa."
+
+
+
+firerate: "Cadência de Tiro"
+fireratedesc: "Este é o intervalo de tempo entre os disparos dos projéteis."
+
+
+costscale: "Multiplicador da Escala de Custos"
+costscaledesc: "É por este valor que o custo da magia será multiplicado; isso compensa o número de conjurações realizadas por segundo."
+
+
+animreltim: "Cronograma de Lançamento da Animação"
+animreltimdesc: "Isso determina em que ponto da animação de conjuração iniciar o disparo de projéteis. Aceita um valor entre 0 e 1."

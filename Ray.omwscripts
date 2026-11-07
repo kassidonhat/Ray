@@ -1,0 +1,58 @@
+# Load
+LOAD: scripts/Load/RayLoadScript.Lua
+
+# Globals
+GLOBAL: scripts/Global/SpawnAndRemoveProjectileLogic.Lua
+GLOBAL: scripts/Global/MoveProjectileLogic.Lua
+GLOBAL: scripts/Global/ImpactLogic.Lua
+GLOBAL: scripts/Global/GlobalTargetHandlingScript.Lua
+
+# Menu
+PLAYER: scripts/Menu/RaySettingsMenu.Lua
+
+
+# Script Added To Projectile
+CUSTOM: scripts/Object/moveProjectileForward-ProjectileScript.Lua
+CUSTOM: scripts/Object/RemoveProjectile-ProjectileScript.Lua
+CUSTOM: scripts/Object/HitDetectionProjectile-ProjectileScript.Lua
+CUSTOM: scripts/Object/AreaHitDetectionProjectile-ProjectileScript.Lua
+
+
+# Individual Magic Effects Scripts
+CUSTOM: scripts/MagicEffects/fireraydamage.Lua
+CUSTOM: scripts/MagicEffects/frostraydamage.Lua
+CUSTOM: scripts/MagicEffects/shockraydamage.Lua
+CUSTOM: scripts/MagicEffects/poisonraydamage.Lua
+CUSTOM: scripts/MagicEffects/damagehealthray.Lua
+CUSTOM: scripts/MagicEffects/absorbhealthray.Lua
+
+
+# NPC
+NPC: scripts/Npc/AddSpellToNPC.Lua
+NPC: scripts/Npc/SpellAbsorbtionTargetActorLogic.Lua
+NPC: scripts/Npc/ApplyDamageToTargetActorLogic.Lua
+NPC: scripts/Npc/ApplyHealingToTargetActorLogic.Lua
+
+
+
+CREATURE: scripts/Npc/SpellAbsorbtionTargetCreatureLogic.Lua
+CREATURE: scripts/Npc/ApplyDamageToTargetCreatureLogic.Lua
+CREATURE: scripts/Npc/ApplyHealingToTargetCreatureLogic.Lua
+
+
+
+#PLAYER scripts
+PLAYER: scripts/Player/RayPlayerLogic.Lua
+
+# PLAYER Handlers
+PLAYER: scripts/Player/Handlers/ApplyDamageToTargetPlayerLogic.Lua
+PLAYER: scripts/Player/Handlers/ApplyHealingToTargetPlayerLogic.Lua
+PLAYER: scripts/Player/Handlers/MagickaHandler.Lua
+
+PLAYER: scripts/Player/Handlers/RayAnimationHandler.Lua
+PLAYER: scripts/Player/Handlers/RayParticleHandler.Lua
+PLAYER: scripts/Player/Handlers/RaySkillHandler.Lua
+PLAYER: scripts/Player/Handlers/RaySoundHandler.Lua
+PLAYER: scripts/Player/Handlers/RaySpellCastingHandler.Lua
+
+PLAYER: scripts/Player/Handlers/SpellAbsorbtionTargetPlayerLogic.Lua

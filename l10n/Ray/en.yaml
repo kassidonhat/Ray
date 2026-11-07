@@ -1,0 +1,24 @@
+# Meta Data
+name: "Ray"
+description: "A mod that adds 4 rapid fire spell effects."
+
+# Mod Settings
+# Meta
+settingsTitle: "Settings"
+# settingsDesc: "Mod Options"
+# Settings
+scalemultiplier: "Damage Scale Multiplier"
+scalemultiplierdesc: "This is what the spell damage will be multiplied by, this is to prevent the spell from being overpowered"
+
+
+
+firerate: "Fire Rate"
+fireratedesc: "This is the amount of time between projectiles firing"
+
+
+costscale: "Cost Scale Multiplier"
+costscaledesc: "This is what the spell cost will be multiplied by, this compensates for the number of cast happening per second"
+
+
+animreltim: "Animation Release Timing"
+animreltimdesc: "This decideds how far into the casting animation to start firing projectiles. Accepts a value between 0 and 1."

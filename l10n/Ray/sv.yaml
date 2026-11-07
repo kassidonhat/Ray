@@ -1,0 +1,25 @@
+# Meta Data
+name: "Ray"
+description: "En mod som lägger till fyra snabbeldsförtrollningseffekter."
+
+# Mod Settings
+# Meta
+settingsTitle: "Inställningar"
+# settingsDesc: "Mod Options"
+# Settings
+scalemultiplier: "Skadeskalamultiplikator"
+scalemultiplierdesc: "Detta är vad besvärjelseskadan kommer att multipliceras med, detta är för att förhindra att besvärjelsen övermannas"
+
+
+
+firerate: "Brandhastighet"
+fireratedesc: "Detta är tiden mellan projektilernas avfyrning"
+
+
+costscale: "Kostnadsskalamultiplikator"
+costscaledesc: "Detta är vad besvärjelseskostnaden multipliceras med, detta kompenserar för antalet kast som sker per sekund."
+
+
+animreltim: "Timing för animering"
+animreltimdesc: "Detta avgör hur långt in i casting-animationen projektiler ska börja avfyras. Accepterar ett värde mellan 0 och 1."
+
