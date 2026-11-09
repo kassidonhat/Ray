@@ -16,85 +16,51 @@ local util = require('openmw.util')
 
 
 
+-- --====================================
+-- -- Variables
+-- --====================================
+-- local projectileModel = nil
+-- local ParticleForVFX = nil
+-- local SpellID = nil
+
+
+
+
+
 
 --====================================
--- Spawn Projectile Logic
+-- Move Projectile Logic
 --====================================
-local function SpawnProjectileLocal(sentData)
-
-
+local function MoveProjectileLocal(PassedData)
 	
-	--Here we make the projectile, add the script to it, and teleport it in front of the player
-	projectileObjectMade = world.createObject(sentData.ProjectileObjectID)
-	for i in pairs(sentData) do
-		if string.find(tostring(sentData[i]), "ProjectileScript.Lua") then
-			projectileObjectMade:addScript(sentData[i],sentData)
-		end
+	--This string is how the game recoginizes what to delete with the vfx.remove function
+	local SpellRemover = PassedData.ProjectileObject.id..'SpellRemover'	
+	
+	--This moves the actual object itself
+	PassedData.ProjectileObject:teleport(PassedData.ProjectileObject.cell,PassedData.ProjectilePostion)
+	
+	--this all handles the removal of the last vfx position and the addition of the new vfx position
+	local vfxPosit = PassedData.ProjectilePostion-util.vector3(0,0,100)
+	local function removeTheVFX(vfxId)
+		world.vfx.remove(vfxId)
 	end
-	
-															
-	projectileObjectMade:teleport(sentData.CurrentplayerCell, sentData.ProjectilePostion)
+	if pcall(removeTheVFX,SpellRemover) then
+		removeTheVFX(SpellRemover)
+	end
+
+
+	world.vfx.spawn(PassedData.projectileModel,vfxPosit,{ useAmbientLight = true, vfxId = SpellRemover
+																				--,particleTextureOverride = PassedData.ParticleForVFX
+																				})
 end
-
-
-
-
-
-
-
-
---====================================
--- Remove Projectile Logic
---====================================
-local function RemoveProjectileLocal(dataPassed)
-
-
-
-
-
-	--protection, sometimes the hit detection script sends this event twice
-	if not dataPassed.ProjectileObject then
-		print("Projectile not found")
-		return
-	end
-	
-	local function CanWeRemoveTheProjectile(proj)
-		proj:remove()
-	end
-	--deletes the object and script, if it exists
-	--[[
-	if pcall(CanWeRemoveTheProjectile,dataPassed.ProjectileObject) then
-		dataPassed.ProjectileObject:remove()
-	end]]
-	pcall(CanWeRemoveTheProjectile,dataPassed.ProjectileObject)
-	if not dataPassed.ProjectileObject then
-
-		for i in pairs(dataPassed) do
-			if string.find(tostring(dataPassed[i]), "ProjectileScript.Lua") then
-				dataPassed.ProjectileObject:removeScript(dataPassed[i])
-
-			end
-		end
-	end
-
-end
-
-
-
-
-
-
 
 
 --====================================================================================================================================================================================================
 --  Event Handlers
 --====================================================================================================================================================================================================
 return {
-	
-    eventHandlers = {		
-        SpawnProjectile = SpawnProjectileLocal,
-        RemoveProjectile = RemoveProjectileLocal
+    eventHandlers = {
+        MoveProjectile = MoveProjectileLocal
     }
 	
 }
-

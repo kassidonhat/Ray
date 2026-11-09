@@ -16,51 +16,37 @@ local util = require('openmw.util')
 
 
 
---====================================
--- Variables
---====================================
-local projectileModel = nil
-local ParticleForVFX = nil
-local SpellID = nil
-
-
-
-
-
 
 --====================================
--- Move Projectile Logic
+-- Spawn Projectile Logic
 --====================================
-local function MoveProjectileLocal(PassedData)
+local function SpawnProjectileLocal(sentData)
+
+
 	
-	--This string is how the game recoginizes what to delete with the vfx.remove function
-	local SpellRemover = PassedData.ProjectileObject.id..'SpellRemover'	
-	
-	--This moves the actual object itself
-	PassedData.ProjectileObject:teleport(PassedData.ProjectileObject.cell,PassedData.ProjectilePostion)
-	
-	--this all handles the removal of the last vfx position and the addition of the new vfx position
-	local vfxPosit = PassedData.ProjectilePostion-util.vector3(0,0,100)
-	local function removeTheVFX(vfxId)
-		world.vfx.remove(vfxId)
+	--Here we make the projectile, add the script to it, and teleport it in front of the player
+	projectileObjectMade = world.createObject(sentData.ProjectileObjectID)
+	for i in pairs(sentData) do
+		if string.find(tostring(sentData[i]), "ProjectileScript.Lua") then
+			projectileObjectMade:addScript(sentData[i],sentData)
+		end
 	end
-	if pcall(removeTheVFX,SpellRemover) then
-		removeTheVFX(SpellRemover)
-	end
-
-
-	world.vfx.spawn(PassedData.projectileModel,vfxPosit,{ useAmbientLight = true, vfxId = SpellRemover
-																				--,particleTextureOverride = PassedData.ParticleForVFX
-																				})
+	
+															
+	projectileObjectMade:teleport(sentData.CurrentplayerCell, sentData.ProjectilePostion)
 end
+
+
 
 
 --====================================================================================================================================================================================================
 --  Event Handlers
 --====================================================================================================================================================================================================
 return {
-    eventHandlers = {
-        MoveProjectile = MoveProjectileLocal
+	
+    eventHandlers = {		
+        SpawnProjectile = SpawnProjectileLocal,
     }
 	
 }
+

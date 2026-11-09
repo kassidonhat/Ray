@@ -2,10 +2,11 @@
 LOAD: scripts/Load/RayLoadScript.Lua
 
 # Globals
-GLOBAL: scripts/Global/SpawnAndRemoveProjectileLogic.Lua
-GLOBAL: scripts/Global/MoveProjectileLogic.Lua
-GLOBAL: scripts/Global/ImpactLogic.Lua
-GLOBAL: scripts/Global/GlobalTargetHandlingScript.Lua
+GLOBAL: scripts/Global/Projectile/SpawnProjectileLogic.Lua
+GLOBAL: scripts/Global/Projectile/MoveProjectileLogic.Lua
+GLOBAL: scripts/Global/Projectile/RemoveProjectileLogic.Lua
+GLOBAL: scripts/Global/Hit/ImpactLogic.Lua
+GLOBAL: scripts/Global/Hit/GlobalTargetHandlingScript.Lua
 
 # Menu
 PLAYER: scripts/Menu/RaySettingsMenu.Lua

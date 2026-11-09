@@ -1,8 +1,6 @@
 local content = require('openmw.content')
 
 
-
-
 --====================================
 --add projectile objects
 --====================================
@@ -12,9 +10,6 @@ content.activators.records.EmptyModelProjectile = {
 														mwscript = nil,
 														name = "Empty Model Projectile"
 														}
-
-
-
 
 
 
