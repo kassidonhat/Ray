@@ -36,9 +36,12 @@ local function MoveProjectileLocal(PassedData)
 	--This string is how the game recoginizes what to delete with the vfx.remove function
 	local SpellRemover = PassedData.ProjectileObject.id..'SpellRemover'	
 	
-	--This moves the actual object itself
-	PassedData.ProjectileObject:teleport(PassedData.ProjectileObject.cell,PassedData.ProjectilePostion)
-	
+	local function testTeleport(PassedDatap)
+		--this moves the projectile forward, and teleports it to the new position, this is done in a pcall because if the projectile is removed before this function is called, it will error out and break the script
+		PassedDatap.ProjectileObject:teleport(PassedDatap.ProjectileObject.cell,PassedDatap.ProjectilePostion)
+	end
+	protectHolder =	pcall(testTeleport,PassedData)
+
 	--this all handles the removal of the last vfx position and the addition of the new vfx position
 	local vfxPosit = PassedData.ProjectilePostion-util.vector3(0,0,100)
 	local function removeTheVFX(vfxId)

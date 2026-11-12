@@ -94,6 +94,8 @@ end
 local function AreaHitDetectFunction(PassedTable)
     if self:isValid() == false then return {} end
     if not PassedTable.HitDetectedSwitch then return PassedTable end
+    if PassedTable.AreaHitDetectFired then return PassedTable end
+    PassedTable.AreaHitDetectFired = true
 
 	-- Define bounding box
 	local halfOfASideOfTheBoundingBox = PassedTable.SizeOfArea*(1/3.28084)*70
