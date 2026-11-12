@@ -32,7 +32,7 @@ local util = require('openmw.util')
 -- Move Projectile Logic
 --====================================
 local function MoveProjectileLocal(PassedData)
-	
+
 	--This string is how the game recoginizes what to delete with the vfx.remove function
 	local SpellRemover = PassedData.ProjectileObject.id..'SpellRemover'	
 	

@@ -17,7 +17,7 @@ CUSTOM: scripts/Object/moveProjectileForward-ProjectileScript.Lua
 CUSTOM: scripts/Object/RemoveProjectile-ProjectileScript.Lua
 CUSTOM: scripts/Object/HitDetectionProjectile-ProjectileScript.Lua
 CUSTOM: scripts/Object/AreaHitDetectionProjectile-ProjectileScript.Lua
-
+CUSTOM: scripts/Object/ObjectLogicScript.Lua
 
 # Individual Magic Effects Scripts
 CUSTOM: scripts/MagicEffects/fireraydamage.Lua
