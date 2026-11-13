@@ -38,11 +38,6 @@ return{
 			projectileDataTable = data
 			projectileDataTable["ProjectileObject"] = self
 			
-            -- for k, v in pairs(projectileDataTable) do
-            --     if string.find(tostring(k), "ProjectileFunction") then
-            --         FuncTable[k] = v
-            --     end
-            -- end
 			FuncTable = RequireBuilder.RequireBuilder("ProjectileObject",projectileDataTable)
 
 		end,

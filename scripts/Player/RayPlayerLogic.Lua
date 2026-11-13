@@ -106,16 +106,20 @@ return {
 		--====================================================================================================
 		onUpdate = function (dt2)
 
-			if anim.getCompletion(self, 'raycast') ~= nil then
-				if anim.getCompletion(self, 'raycast') > AnimationReleaseT 
-						or anim.isPlaying(self, 'raycastloop') then
+			local castState = anim.getCompletion(self, 'raycast')
+			if castState == nil then
+				castState = 0
+			end
 
+			if castState ~= 0 or anim.isPlaying(self, 'raycastloop') then
+				if castState > AnimationReleaseT or anim.isPlaying(self, 'raycastloop') then
+					
 					local SelectedSpell = types.Actor.getSelectedSpell(self)
 
 					fireTimer = fireTimer -dt2
 					if fireTimer < 0 and UIInter.getMode() == nil then
 						fireTimer = FIRE_RATE
-
+						
 
 						if not PlayerLogic.checkMagicka(SelectedSpell.cost, Cost_SCALE) then
 							return end
@@ -123,7 +127,7 @@ return {
 							CostScale = Cost_SCALE})
 									
 						self:sendEvent('RaySkillGainEvent', {SkillUsed = PlayerLogic.GetRayEffectSchoolInSpell(SelectedSpell)})
-
+						
 						-----------------------------------------------------
 						--Player VFX and SFX
 						self:sendEvent('playParticleAnimationEvent')

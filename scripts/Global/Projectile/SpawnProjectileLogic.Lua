@@ -23,7 +23,7 @@ local util = require('openmw.util')
 local function SpawnProjectileLocal(sentData)
 
 
-	
+
 	--Here we make the projectile, add the script to it, and teleport it in front of the player
 	local projectileObjectMade = world.createObject(sentData.ProjectileObjectID)
 	-- for i in pairs(sentData) do

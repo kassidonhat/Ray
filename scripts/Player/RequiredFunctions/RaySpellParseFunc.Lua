@@ -39,11 +39,6 @@ local function SpellParse(PassedSpellID)
             passedTable["ProjectileObjectID"] = 'emptymodelprojectile'
             passedTable["DamageObjectID"] = 'emptymodelprojectile'
             passedTable["maxTime"] = 3
-		
-            -- passedTable["moveProjectileScript"] = 'scripts/Object/moveProjectileForward-ProjectileScript.Lua'
-            -- passedTable["hitDetectProjectileScript"] = 'scripts/Object/RemoveProjectile-ProjectileScript.Lua'
-            -- passedTable["RemoveProjectileScript"] = 'scripts/Object/HitDetectionProjectile-ProjectileScript.Lua'
-            -- passedTable["AreaHitDetectionProjectile"] = 'scripts/Object/AreaHitDetectionProjectile-ProjectileScript.Lua'
             passedTable["SpellID"] = PassedSpellID
             passedTable["ScriptType#ProjectileObject#ScriptPath:scripts.Require.RayProjectileFunctions#MoveProjectileForwardFunction"] = "MoveProjectileForwardFunction"
             passedTable["ScriptType#ProjectileObject#ScriptPath:scripts.Require.RayProjectileFunctions#hitDetectFunction"] = "hitDetectFunction"

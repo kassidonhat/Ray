@@ -12,7 +12,10 @@ local I = require('openmw.interfaces')
 
 
 I.AnimationController.addTextKeyHandler('spellcast', function(groupname, key)
+	if key ~= 'target start' then return end
 
+	
+	
     local CurrentSpell = types.Actor.getSelectedSpell(self) 
     if types.Actor.getStance(self) == types.Actor.STANCE.Spell and 
         PlayerLogic.checkIfRayEffectInSpell(CurrentSpell).check then
