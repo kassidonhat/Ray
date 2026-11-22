@@ -6,6 +6,7 @@ local util = require('openmw.util')
 local camera = require('openmw.camera')
 
 
+
 --========================================================================================================================================================================================================
 --this handles the skill gain for custom spells
 --========================================================================================================================================================================================================
@@ -17,6 +18,23 @@ local function SpellCastSkillGain(passedTable)
 	SkillProgression.skillUsed(passedTable.CustomEffectSchool, {useType = SkillProgression.SKILL_USE_TYPES.Spellcast_Success,scale=passedTable.Cost_SCALE })
     return passedTable  
 end
+
+
+
+--========================================================================================================================================================================================================
+--this sends a global event to spawn the projectile
+--========================================================================================================================================================================================================
+local function SendGlobalEventToSpawnProjectile(passedTable)
+    if passedTable.ContinueCheck == false then return passedTable end
+
+	passedTable["EventScript"] ='GlobalSpawnProjectile'
+    core.sendGlobalEvent('GlobalEventBulider',passedTable)
+
+    return passedTable
+end
+
+
+
 
 
 --========================================================================================================================================================================================================
@@ -144,9 +162,9 @@ local function getPlayerDirection(passedTable)
     local additionVector2 = directionOfCamera
     local pos = self.position + StartingPositionAdjustmet +util.vector3(0,0,200)
 
-    -- local ReturnTable = {pos = pos, additionVector2 = additionVector2}
     passedTable['ProjectilePostion'] = pos
     passedTable['DirectionPassed'] = additionVector2
+    passedTable["CurrentplayerCell"] = self.cell.name
     return passedTable
 end
 
@@ -181,7 +199,7 @@ return {
     SpellCastSkillGain = SpellCastSkillGain,
     playParticleAnimation = playParticleAnimation,
     playSpellSound = playSpellSound,
-    ResetSoundTimer = ResetSoundTimer,
     getPlayerDirection = getPlayerDirection,
-    checkMagickaFunc = checkMagickaFunc
+    checkMagickaFunc = checkMagickaFunc,
+    SendGlobalEventToSpawnProjectile = SendGlobalEventToSpawnProjectile
 }

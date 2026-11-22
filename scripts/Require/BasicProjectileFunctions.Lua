@@ -42,7 +42,9 @@ local function MoveProjectileForwardFunction(PassedTable)
     --send the event to move the projectile forward, also sends the info to spawn the vfx
     if  PassedTable.timer >0.5 then
         PassedTable.ProjectilePostion = PassedTable.ProjectilePostion +  (PassedTable.DirectionPassed*20)
-        core.sendGlobalEvent('MoveProjectile', PassedTable)				
+        -- core.sendGlobalEvent('MoveProjectile', PassedTable)				
+        PassedTable["EventScript"] ='GlobalMoveProjectile'
+        core.sendGlobalEvent('GlobalEventBulider',PassedTable)				
         -- self:sendEvent('MoveProjectilePostionFunc', PassedTable)
         
     end
@@ -151,7 +153,9 @@ local function RemovalFunction(PassedTable)
         
     --Sends the event to remove the object if it's been around too long, and makes sure the movement logic doesn't try to run after removal
     if PassedTable.timer > PassedTable.maxTime or PassedTable.DirectionPassed == nil then
-        core.sendGlobalEvent('RemoveProjectile', PassedTable)
+        -- core.sendGlobalEvent('RemoveProjectile', PassedTable)
+        PassedTable["EventScript"] ='GlobalRemoveProjectile'
+        core.sendGlobalEvent('GlobalEventBulider',PassedTable)
     end
     
     -- this is for safety

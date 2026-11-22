@@ -21,13 +21,11 @@ input.registerActionHandler('Use', async:callback(function()
 	if anim.isPlaying(self, 'raycastloop') then
 		anim.cancel(self, 'raycast')
 		anim.cancel(self, 'raycastloop')
-		self:sendEvent('ResetSoundTimerEvent')
 	end
 
 	if anim.isPlaying(self, 'raycast') then
 		anim.cancel(self, 'raycast')
 		anim.cancel(self, 'raycastloop')
-		self:sendEvent('ResetSoundTimerEvent')
 	end
 
 end))

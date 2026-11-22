@@ -37,7 +37,7 @@ return{
 		onInit = function(data)
 			projectileDataTable = data
 			projectileDataTable["ProjectileObject"] = self
-			
+
 			FuncTable = RequireBuilder.RequireBuilder("ProjectileObject",projectileDataTable)
 
 		end,

@@ -2,9 +2,7 @@
 LOAD: scripts/Load/RayLoadScript.Lua
 
 # Globals
-GLOBAL: scripts/Global/Projectile/SpawnProjectileLogic.Lua
-GLOBAL: scripts/Global/Projectile/MoveProjectileLogic.Lua
-GLOBAL: scripts/Global/Projectile/RemoveProjectileLogic.Lua
+GLOBAL: scripts/Global/globalEventHandler.Lua
 GLOBAL: scripts/Global/Hit/ImpactLogic.Lua
 GLOBAL: scripts/Global/Hit/GlobalTargetHandlingScript.Lua
 
@@ -39,18 +37,13 @@ CREATURE: scripts/Npc/ApplyHealingToTargetCreatureLogic.Lua
 
 
 #PLAYER scripts
-PLAYER: scripts/Player/RayPlayerLogic.Lua
 PLAYER: scripts/Player/playerEventHandler.Lua
 
 # PLAYER Handlers
 PLAYER: scripts/Player/Handlers/ApplyDamageToTargetPlayerLogic.Lua
 PLAYER: scripts/Player/Handlers/ApplyHealingToTargetPlayerLogic.Lua
-PLAYER: scripts/Player/Handlers/MagickaHandler.Lua
 
 PLAYER: scripts/Player/Handlers/RayAnimationHandler.Lua
-PLAYER: scripts/Player/Handlers/RayParticleHandler.Lua
-PLAYER: scripts/Player/Handlers/RaySkillHandler.Lua
-PLAYER: scripts/Player/Handlers/RaySoundHandler.Lua
 PLAYER: scripts/Player/Handlers/RaySpellCastingHandler.Lua
 
 PLAYER: scripts/Player/Handlers/SpellAbsorbtionTargetPlayerLogic.Lua

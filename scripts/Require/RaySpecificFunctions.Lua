@@ -73,7 +73,7 @@ end
 
 
 --====================================================================================================
---this checks if the spell start firing
+--this checks if the spell firing event needs to be sent again
 --====================================================================================================
 local function RayFireTheEventBasedOnFireRate(passedTable) 
 
@@ -134,7 +134,7 @@ local function RaySpellParse(passedTable)
             passedTable["maxTime"] = 3
             passedTable["SpellID"] = SpellID
             passedTable["SpellCost"] = SpellVar.cost
-
+            passedTable["ScriptAddedToProjectile"] = "scripts/Object/ObjectLogicScript.Lua"
 
             -- add the mod settings
             passedTable.AnimationReleaseT = AnimationReleaseT
@@ -142,6 +142,7 @@ local function RaySpellParse(passedTable)
             passedTable.FIRE_RATE = FIRE_RATE
 
 
+            -- script building instructions
             passedTable["#1#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.RaySpecificFunctions#RayAnimationCheck"] = "RayAnimationCheck"
             passedTable["#2#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#checkMagickaFunc"] = "checkMagickaFunc"
             passedTable["#3#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#TakeMagickaFromPlayerLocal"] = "TakeMagickaFromPlayerLocal"
@@ -150,7 +151,8 @@ local function RaySpellParse(passedTable)
             passedTable["#6#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#playParticleAnimation"] = "playParticleAnimation"
             passedTable["#7#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#playSpellSound"] = "playSpellSound"
             passedTable["#8#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#getPlayerDirection"] = "getPlayerDirection"
-            passedTable["#9#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.RaySpecificFunctions#RayFireTheEventBasedOnFireRate"] = "RayFireTheEventBasedOnFireRate"
+            passedTable["#9#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#SendGlobalEventToSpawnProjectile"] = "SendGlobalEventToSpawnProjectile"
+            passedTable["#10#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.RaySpecificFunctions#RayFireTheEventBasedOnFireRate"] = "RayFireTheEventBasedOnFireRate"
             
 
             passedTable["#1#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#MoveProjectileForwardFunction"] = "MoveProjectileForwardFunction"
@@ -158,6 +160,12 @@ local function RaySpellParse(passedTable)
             passedTable["#3#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#AreaHitDetectFunction"] = "AreaHitDetectFunction"
             passedTable["#4#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#EarlyRemovalFunction"] = "EarlyRemovalFunction"
             passedTable["#5#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#RemovalFunction"] = "RemovalFunction"
+
+            passedTable["#1#ScriptType#GlobalSpawnProjectile#ScriptPath:scripts.Require.GlobalProjectileFunctions#SpawnProjectile"] = "SpawnProjectile"
+            
+            passedTable["#1#ScriptType#GlobalMoveProjectile#ScriptPath:scripts.Require.GlobalProjectileFunctions#MoveProjectile"] = "MoveProjectile"
+            
+            passedTable["#1#ScriptType#GlobalRemoveProjectile#ScriptPath:scripts.Require.GlobalProjectileFunctions#RemoveProjectile"] = "RemoveProjectile"
 
 
 			-- We only grab the first one even though technically you could have two different ray effects.
