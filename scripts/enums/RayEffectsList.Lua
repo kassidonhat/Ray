@@ -11,8 +11,6 @@ local RayEffects = {fireraydamage = true,
 					absorbhealthray = true}
 
 
-
-
 return RayEffects
 
 

@@ -40,6 +40,7 @@ CREATURE: scripts/Npc/ApplyHealingToTargetCreatureLogic.Lua
 
 #PLAYER scripts
 PLAYER: scripts/Player/RayPlayerLogic.Lua
+PLAYER: scripts/Player/playerEventHandler.Lua
 
 # PLAYER Handlers
 PLAYER: scripts/Player/Handlers/ApplyDamageToTargetPlayerLogic.Lua

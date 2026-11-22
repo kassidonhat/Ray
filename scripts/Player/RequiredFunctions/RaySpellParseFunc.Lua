@@ -6,6 +6,15 @@ local self = require('openmw.self')
 
 
 
+
+
+
+
+
+
+
+
+
 --====================================================================================================
 --this handles the spell Parsing
 --====================================================================================================
@@ -40,11 +49,11 @@ local function SpellParse(PassedSpellID)
             passedTable["DamageObjectID"] = 'emptymodelprojectile'
             passedTable["maxTime"] = 3
             passedTable["SpellID"] = PassedSpellID
-            passedTable["ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#MoveProjectileForwardFunction"] = "MoveProjectileForwardFunction"
-            passedTable["ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#hitDetectFunction"] = "hitDetectFunction"
-            passedTable["ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#AreaHitDetectFunction"] = "AreaHitDetectFunction"
-            passedTable["ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#EarlyRemovalFunction"] = "EarlyRemovalFunction"
-            passedTable["ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#RemovalFunction"] = "RemovalFunction"
+            passedTable["@1#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#MoveProjectileForwardFunction"] = "MoveProjectileForwardFunction"
+            passedTable["@200#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#hitDetectFunction"] = "hitDetectFunction"
+            passedTable["#start3End#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#AreaHitDetectFunction"] = "AreaHitDetectFunction"
+            passedTable[":4:ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#EarlyRemovalFunction"] = "EarlyRemovalFunction"
+            passedTable["@5@ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#RemovalFunction"] = "RemovalFunction"
 
 
 			-- We only grab the first one even though technically you could have two different ray effects.

@@ -70,9 +70,6 @@ local function HitTargetWithSpellLocal(PassedData)
 
 		-- This checks if the effect is a custom effect that was passed
 		if CustomEffectsPassed[SpellVar.effects[key].id] then
-					
-					
-
 
 					--This grabs the values out of the effect that we need
 					local newmagnitudeMax = nil

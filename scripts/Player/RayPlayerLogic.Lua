@@ -105,6 +105,8 @@ return {
 		--Frame by frame logic 
 		--====================================================================================================
 		onUpdate = function (dt2)
+			if 1 == 1 then return end
+			print("is this running")
 
 			local castState = anim.getCompletion(self, 'raycast')
 			if castState == nil then
@@ -130,6 +132,9 @@ return {
 						
 						-----------------------------------------------------
 						--Player VFX and SFX
+
+						print("is this running")
+
 						self:sendEvent('playParticleAnimationEvent')
 						self:sendEvent('playSpellSoundEvent', dt2)
 					
