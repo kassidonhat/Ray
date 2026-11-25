@@ -12,7 +12,7 @@ local camera = require('openmw.camera')
 --========================================================================================================================================================================================================
 local function SpellCastSkillGain(passedTable)
 
-    if passedTable.ContinueCheck ~= true then return passedTable end
+    -- if passedTable.ContinueCheck ~= true then return passedTable end
 
     if(passedTable.Cost_SCALE == nil) then passedTable.Cost_SCALE = 1 end
 	SkillProgression.skillUsed(passedTable.CustomEffectSchool, {useType = SkillProgression.SKILL_USE_TYPES.Spellcast_Success,scale=passedTable.Cost_SCALE })
@@ -25,7 +25,7 @@ end
 --this sends a global event to spawn the projectile
 --========================================================================================================================================================================================================
 local function SendGlobalEventToSpawnProjectile(passedTable)
-    if passedTable.ContinueCheck == false then return passedTable end
+    -- if passedTable.ContinueCheck == false then return passedTable end
 
 	passedTable["EventScript"] ='GlobalSpawnProjectile'
     core.sendGlobalEvent('GlobalEventBulider',passedTable)
@@ -42,7 +42,7 @@ end
 --========================================================================================================================================================================================================
 local function playParticleAnimation(passedTable)
 
-    if passedTable.ContinueCheck == false then return passedTable end
+    -- if passedTable.ContinueCheck == false then return passedTable end
 
 
 	local SpellEffectForAnimation =  types.Actor.getSelectedSpell(self).effects[1]
@@ -67,7 +67,7 @@ end
 --========================================================================================================================================================================================================
 local function playSpellSound(passedTable)
 
-    if passedTable.ContinueCheck == false then return passedTable end
+    -- if passedTable.ContinueCheck == false then return passedTable end
 
 	if passedTable['soundtimer'] == nil then passedTable['soundtimer'] = core.getSimulationTime() end
     local spell = types.Actor.getSelectedSpell(self)
@@ -105,7 +105,7 @@ end
 --  This Handles the magicka cost for custom spells
 --========================================================================================================================================================================================================
 local function TakeMagickaFromPlayerLocal(passedTable)
-    if passedTable.ContinueCheck == false then return passedTable end
+    -- if passedTable.ContinueCheck == false then return passedTable end
 
 	local CostScalelocal = 1
     if passedTable.Cost_SCALE ~= nil then CostScalelocal = passedTable.Cost_SCALE end
@@ -155,7 +155,7 @@ end
 
 local function getPlayerDirection(passedTable) 
 
-    if passedTable.ContinueCheck == false then return passedTable end
+    -- if passedTable.ContinueCheck == false then return passedTable end
 
     local directionOfCamera = camera.viewportToWorldVector(util.vector2(0.5,0.5))
     local StartingPositionAdjustmet = directionOfCamera*40
@@ -180,7 +180,7 @@ end
 
 local function checkMagickaFunc(passedTable)
 
-    if passedTable.ContinueCheck == false then return passedTable end
+    -- if passedTable.ContinueCheck == false then return passedTable end
 
     -- Check magicka
     local magickaCost = (passedTable.cost or 1) * passedTable.Cost_SCALE

@@ -54,7 +54,17 @@ settings:subscribe(async:callback(updateAnimationReleaseTiming))
 --====================================================================================================
 --this checks if the spell start firing
 --====================================================================================================
-local function RayAnimationCheck(passedTable) 
+local function RayAnimationCheck(passedTable)
+
+    local function continueCheckDependency()
+        if passedTable.ContinueCheck == false then 
+            passedTable["BreakCheck"] = true
+        return passedTable end
+    end
+
+    if passedTable == "DependencyInjection" then return continueCheckDependency end
+    
+
     passedTable["ContinueCheck"] = false
     local castState = anim.getCompletion(self, 'raycast')
     if castState == nil then
@@ -82,7 +92,6 @@ local function RayFireTheEventBasedOnFireRate(passedTable)
         self:sendEvent('PlayerEventBulider', passedTable)
     end
     local EventFireAsync = async:registerTimerCallback('EventFire', EventFire)
-    -- async:newSimulationTimer(3, asdfasfdasdfasdfas,{sdfas="boy",asdasg="fgadf"})
     
     if anim.isPlaying(self, 'raycastloop') or anim.isPlaying(self, 'raycast') then
         async:newSimulationTimer(passedTable.FIRE_RATE, EventFireAsync, passedTable)
@@ -90,7 +99,6 @@ local function RayFireTheEventBasedOnFireRate(passedTable)
 
     return passedTable
 end
-
 
 
 
@@ -143,29 +151,29 @@ local function RaySpellParse(passedTable)
 
 
             -- script building instructions
-            passedTable["#1#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.RaySpecificFunctions#RayAnimationCheck"] = "RayAnimationCheck"
-            passedTable["#2#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#checkMagickaFunc"] = "checkMagickaFunc"
-            passedTable["#3#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#TakeMagickaFromPlayerLocal"] = "TakeMagickaFromPlayerLocal"
-            passedTable["#4#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.CustomEffectFunctions#GetCustomEffectSchoolInSpell"] = "GetCustomEffectSchoolInSpell"
-            passedTable["#5#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#SpellCastSkillGain"] = "SpellCastSkillGain"
-            passedTable["#6#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#playParticleAnimation"] = "playParticleAnimation"
-            passedTable["#7#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#playSpellSound"] = "playSpellSound"
-            passedTable["#8#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#getPlayerDirection"] = "getPlayerDirection"
-            passedTable["#9#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#SendGlobalEventToSpawnProjectile"] = "SendGlobalEventToSpawnProjectile"
-            passedTable["#10#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.RaySpecificFunctions#RayFireTheEventBasedOnFireRate"] = "RayFireTheEventBasedOnFireRate"
+            passedTable["#IndexPostion:1#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.RaySpecificFunctions#RayAnimationCheck#DependencyInjection:2,3,4,5,6,7,8,9#"] = "RayAnimationCheck"
+            passedTable["#IndexPostion:2#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#checkMagickaFunc"] = "checkMagickaFunc"
+            passedTable["#IndexPostion:3#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#TakeMagickaFromPlayerLocal"] = "TakeMagickaFromPlayerLocal"
+            passedTable["#IndexPostion:4#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.CustomEffectFunctions#GetCustomEffectSchoolInSpell"] = "GetCustomEffectSchoolInSpell"
+            passedTable["#IndexPostion:5#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#SpellCastSkillGain"] = "SpellCastSkillGain"
+            passedTable["#IndexPostion:6#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#playParticleAnimation"] = "playParticleAnimation"
+            passedTable["#IndexPostion:7#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#playSpellSound"] = "playSpellSound"
+            passedTable["#IndexPostion:8#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#getPlayerDirection"] = "getPlayerDirection"
+            passedTable["#IndexPostion:9#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.BasicSpellFunctions#SendGlobalEventToSpawnProjectile"] = "SendGlobalEventToSpawnProjectile"
+            passedTable["#IndexPostion:10#ScriptType#PlayerLogicScript#ScriptPath:scripts.Require.RaySpecificFunctions#RayFireTheEventBasedOnFireRate"] = "RayFireTheEventBasedOnFireRate"
             
 
-            passedTable["#1#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#MoveProjectileForwardFunction"] = "MoveProjectileForwardFunction"
-            passedTable["#2#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#hitDetectFunction"] = "hitDetectFunction"
-            passedTable["#3#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#AreaHitDetectFunction"] = "AreaHitDetectFunction"
-            passedTable["#4#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#EarlyRemovalFunction"] = "EarlyRemovalFunction"
-            passedTable["#5#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#RemovalFunction"] = "RemovalFunction"
+            passedTable["#IndexPostion:1#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#MoveProjectileForwardFunction"] = "MoveProjectileForwardFunction"
+            passedTable["#IndexPostion:2#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#hitDetectFunction"] = "hitDetectFunction"
+            passedTable["#IndexPostion:3#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#AreaHitDetectFunction"] = "AreaHitDetectFunction"
+            passedTable["#IndexPostion:4#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#EarlyRemovalFunction"] = "EarlyRemovalFunction"
+            passedTable["#IndexPostion:5#ScriptType#ProjectileObject#ScriptPath:scripts.Require.BasicProjectileFunctions#RemovalFunction"] = "RemovalFunction"
 
-            passedTable["#1#ScriptType#GlobalSpawnProjectile#ScriptPath:scripts.Require.GlobalProjectileFunctions#SpawnProjectile"] = "SpawnProjectile"
+            passedTable["#IndexPostion:1#ScriptType#GlobalSpawnProjectile#ScriptPath:scripts.Require.GlobalProjectileFunctions#SpawnProjectile"] = "SpawnProjectile"
             
-            passedTable["#1#ScriptType#GlobalMoveProjectile#ScriptPath:scripts.Require.GlobalProjectileFunctions#MoveProjectile"] = "MoveProjectile"
+            passedTable["#IndexPostion:1#ScriptType#GlobalMoveProjectile#ScriptPath:scripts.Require.GlobalProjectileFunctions#MoveProjectile"] = "MoveProjectile"
             
-            passedTable["#1#ScriptType#GlobalRemoveProjectile#ScriptPath:scripts.Require.GlobalProjectileFunctions#RemoveProjectile"] = "RemoveProjectile"
+            passedTable["#IndexPostion:1#ScriptType#GlobalRemoveProjectile#ScriptPath:scripts.Require.GlobalProjectileFunctions#RemoveProjectile"] = "RemoveProjectile"
 
 
 			-- We only grab the first one even though technically you could have two different ray effects.

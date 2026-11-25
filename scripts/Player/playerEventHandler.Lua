@@ -23,10 +23,9 @@ local function PlayerEventBulider(passedTable)
     FuncTable = RequireBuilder.RequireBuilder(passedTable.EventScript,passedTable)
     passedTable["EventScript"] = nil
 
+    
+    RequireBuilder.CallOrParse(FuncTable,passedTable)
 
-    for k, v in pairs(FuncTable) do
-        passedTable=v(passedTable)
-    end
 
 end
 
