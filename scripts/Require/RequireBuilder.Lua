@@ -52,6 +52,7 @@ local function dependencyInjectionFunc(stringPassed,FuncTablePassed,IndexPositio
                     -- from inside of the table we're currently iterating through
                     if passedTable["BreakCheck"] then
                         passedTable["BreakCheck"] = nil
+                        
                         break
                     end
                 end
