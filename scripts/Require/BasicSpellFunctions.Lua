@@ -180,8 +180,15 @@ end
 
 local function checkMagickaFunc(passedTable)
 
-    -- if passedTable.ContinueCheck == false then return passedTable end
+    local function continueCheckDependency()
+        if passedTable.ContinueCheck == false then 
+            passedTable["BreakCheck"] = true
+        return passedTable end
+    end
 
+    if passedTable == "DependencyInjection" then return continueCheckDependency,"continueCheckDependency" end
+
+    
     -- Check magicka
     local magickaCost = (passedTable.cost or 1) * passedTable.Cost_SCALE
     if types.Actor.stats.dynamic.magicka(self).current < magickaCost then 

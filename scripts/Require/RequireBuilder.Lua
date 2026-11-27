@@ -1,96 +1,116 @@
+local StringParseLib = require('scripts.Require.StringParseFunctions')
 
 
 
-local function grabDataFromString(stringPassed,Pattern,deleteCharacterL,deleteCharacterR)
-    -- find the part of the string that we want
-	local i, j = string.find(stringPassed, Pattern)
 
 
-    -- string.sub cuts the other data out of the string 
-    -- the g.sub statments get rid of the string identifier and separators
-	local returnstring = string.gsub(string.sub(stringPassed,i,j),deleteCharacterL,"")
-	local returnstring = string.gsub(returnstring,deleteCharacterR,"")
-	return returnstring
+local function grabTableFromFile(stringPassed)
+    -- get the path to the file where the function is stored
+    local FunctionLoc = StringParseLib.GrabDataFromString(stringPassed,"ScriptPath:[.%w]+#","ScriptPath:","#")
+
+    -- we require the script at the path we just found and return    
+    return require(FunctionLoc)
 end
 
 
-local function dependencyInjectionFunc(stringPassed,FuncTablePassed,IndexPositionPassed)
-
-    stringPassed =grabDataFromString(stringPassed,"DependencyInjection:[,%d]+#","DependencyInjection:","")
-    local indexesForInjection ={}
-    local indexer = 0
-    repeat
-        indexer = indexer+1
-        indexesForInjection[indexer] = grabDataFromString(stringPassed,"%d+","","")
-        local i,j = string.find(stringPassed,"%d+,-")
-        stringPassed = string.sub(stringPassed,j+1,string.len(stringPassed))
-    until string.find(stringPassed,"%d+") == nil
 
 
-    local DependencyObject = FuncTablePassed[IndexPositionPassed]("DependencyInjection")
+local function createDependencyTable(Passed)
 
-    local function injectOrParse(CurrentTable,indexesForInjection,FuncTableObject,currentIndex)
+    local DependencyTable = {}
+    for k,v in pairs(Passed) do
+        -- if(string.find(k,scriptType.."#") and string.find(k,"#DependencyInjection#"))then
+        if v["DependencyInjection"]then
+             
+            -- local reqTable = grabTableFromFile(k)
+            local reqTable = require(v["ScriptPath"])
 
-        local returnTable = {}
-        for k,v in pairs(CurrentTable) do
-            if(CurrentTable == FuncTableObject) then currentIndex = k end
+            -- pass the function the string "DependencyInjection"
+            -- the functions that have injectables will read this and return said injectables
+            local DependencyFunc,DependencyName = reqTable[v["FunctionName"]]("DependencyInjection")
 
-            if type(v) == "function" and indexesForInjection[k] then
-                returnTable = {}
+            -- store the injectable with it's name
+            DependencyTable[DependencyName]=DependencyFunc
+        end
 
-            end
+    end
 
-            --if the current FuncTableObject is a table, recurse and run
-            if type(v) == "table" then
-                
-                for k, v in pairs(FuncTableObject) do
-                    -- here's where the recursion happens
-                    -- tables inside of the func table happen when we need to modify a function
-                    passedTable=CallOrParse(v,passedTable)
-
-                    -- this statement is what's used to break out of the current table loop 
-                    -- from inside of the table we're currently iterating through
-                    if passedTable["BreakCheck"] then
-                        passedTable["BreakCheck"] = nil
-                        
-                        break
-                    end
-                end
-
-            end
+    return DependencyTable
+end
 
 
+local function DependencyInjectionFunc(OriginalFunc,StringPassed,DependencyTable)
+
+    local wholeListString = StringParseLib.GrabDataFromString(StringPassed,"#Dependencies:[%w-,]+#","#Dependencies:","#")
+    -- local FunctionOrder = StringParseLib.GrabListFromString(wholeListString,"[%w-]+",",")
+    
+    -- for i,v in pairs(FunctionOrder) do
+    --     print(v)
+    -- end
+    
+end
+
+
+local function ParseStringIntoInstructionTable(PassedString)
+    -- break up the data in the string into the data labels and data values
+    local listOfDataStrips = StringParseLib.GrabListFromString(PassedString,"[^#]+","#")
+
+    local instructionTable = {}
+    for k,v in pairs(listOfDataStrips) do
+        -- seperate the Labels and the data and place them in the table as key and value
+        instructionTable[string.gsub(v,":[^:]+","")] = string.gsub(v,"[^:]+:","")
+    end
+
+    return instructionTable
+end
+
+
+
+local function filterPassedTableToUsedScriptType(scriptType,Passed)
+    local AssemblyInstructions = {}
+    
+    for k,v in pairs(Passed) do
+        -- checks if the table value is part of the function list we are currently constructing
+        if(string.find(k,scriptType.."#"))then 
+            -- send the string to get parsed into a table
+            AssemblyInstructions[k] = ParseStringIntoInstructionTable(k)
         end
     end
 
+    return AssemblyInstructions
 end
+
+
+
 
 
 
 function RequireBuilderFunc(scriptType,Passed)
+
+    local AssemblyInstructions = filterPassedTableToUsedScriptType(scriptType,Passed)
+
+
+
     local FuncTable = {}
-    for k,v in pairs(Passed) do
+    -- local DependencyTable = createDependencyTable(scriptType,Passed)
+    local DependencyTable = createDependencyTable(AssemblyInstructions)
 
-        -- checks if the table value is part of the function list we are currently constructing
-        if(string.find(k,scriptType.."#"))then
 
-            -- grabs the index position of the function
-            -- without this, we can't decide the order the functions run in
-            local IndexPosition = grabDataFromString(k,"#IndexPostion:%d+#","#IndexPostion:","#")
+    for k,v in pairs(AssemblyInstructions) do
 
-            -- get the path to the file where the function is stored
-            local FunctionLoc = grabDataFromString(k,"ScriptPath:[.%w]+#","ScriptPath:","#")
 
-            -- we require the script at the path we just found, 
-            local reqTable = require(FunctionLoc)
+        -- we get the table that has the function, 
+        local reqTable = require(v["ScriptPath"])
+        
+        --check if the function needs dependency injection
+        -- if(string.find(k,"#Dependencies:"))then reqTable[v] = end
+        -- if(string.find(k,"#Dependencies:"))then 
+        --     DependencyInjectionFunc(reqTable[v],k,DependencyTable)
+        -- end
 
-            -- pull the function we want, 
-            -- and add it to the table
-            FuncTable[tonumber(IndexPosition)] = reqTable[v]
-                
-            if(string.find(k,"#DependencyInjection:"))then dependencyInjectionFunc(k,FuncTable,IndexPosition)end
-            
-        end
+        -- pull the function we want, 
+        -- and add it to the table
+        FuncTable[tonumber(v["IndexPosition"])] = reqTable[v["FunctionName"]]
         
     end
 
